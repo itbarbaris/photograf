@@ -11,9 +11,10 @@ const carouselImages = [
 
 export default function Home() {
   return (
+    
     <HomePageWrapper>
       <Carousel images={carouselImages} />
-      
+
     </HomePageWrapper>
   );
 }

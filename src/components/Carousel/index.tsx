@@ -1,7 +1,10 @@
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+//deps
 import { useEffect, useState } from 'react';
-import classnames from 'classnames';
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+//components
 import Image from 'components/Image';
+//styling
+import classnames from 'classnames';
 import CarouselWrapper from './Carousel.styled';
 
 interface ICarouselProps {
@@ -29,20 +32,55 @@ const Carousel: React.FC<ICarouselProps> = ({ images }) => {
   const handleChangeImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const direction = Number(e.currentTarget.value);
+    const buttonClass = e.currentTarget.className;
 
-    if (direction > 0) setIndex(index + 1);
-    else setIndex(index - 1);
+    //if navigation btn clicked switch to that image
+    if (buttonClass === 'navigator') {
+      setIndex(direction);
+    } else {
+      //go prev/next image
+      setIndex(index + direction);
+    }
   };
+
   return (
     <CarouselWrapper>
-      <div className='controls'>
-        <button value='-1' onClick={handleChangeImage}>
-          <BsChevronCompactLeft />
-        </button>
-        <button value='1' onClick={handleChangeImage}>
-          <BsChevronCompactRight />
-        </button>
-      </div>
+      <section className='controls'>
+        <section className='nextPrevBtn'>
+          <button
+            value='-1'
+            onClick={handleChangeImage}
+            aria-label='предыдущее изображение'
+          >
+            <BsChevronCompactLeft />
+          </button>
+          <button
+            value='1'
+            onClick={handleChangeImage}
+            aria-label='следующее изображение'
+          >
+            <BsChevronCompactRight />
+          </button>
+        </section>
+        <section className='navigateImagesBtn'>
+          {images.map((_, idx) => {
+            const className = classnames({
+              current: idx === index,
+            });
+
+            return (
+              <button
+                key={idx}
+                value={idx}
+                onClick={handleChangeImage}
+                className='navigator'
+              >
+                <div className={className} />
+              </button>
+            );
+          })}
+        </section>
+      </section>
       <section className='carouselContainer'>
         {images.map((image, idx) => {
           const className = classnames({
@@ -50,8 +88,10 @@ const Carousel: React.FC<ICarouselProps> = ({ images }) => {
             activeSlide: index === idx,
             lastSlide: index - 1 === idx || (index === 0 && idx === images.length - 1),
           });
+
           return (
             <Image
+              key={idx}
               src={image}
               layout='fill'
               objectFit='cover'
