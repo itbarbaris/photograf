@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -18,14 +18,18 @@ const GlobalStyle = createGlobalStyle`
   #__next {
     width: 100%;
     height: 100%;
+    color: #323232;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    overflow: hidden;
   }
 
   #__next {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    background-color: lightseagreen;
-    color: #b8c6c3;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
   }
 
   ul {
@@ -34,7 +38,6 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: #b8c6c3;
   }
 `;
 

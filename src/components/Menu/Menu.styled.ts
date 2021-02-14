@@ -1,20 +1,28 @@
 import styled from 'styled-components';
 
-const StyledMenu = styled.ul`
+interface IStyledMenuProps {
+  title?: string;
+}
+
+const StyledMenu = styled.ul<{ title?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
 
   li,
   a {
-    color: #323232;
+    color: #d2f0ee;
   }
 
   li {
     margin: 0 0 5px 5px;
+    line-height: 38px;
+    display: flex;
+    align-items: center;
 
     &.sidebarTitle {
-      font-size: 3rem;
+      font-size: 2.6rem;
       text-align: center;
       margin: 10px 15px 0 15px;
       border-bottom: 1px solid #ccc;
@@ -22,14 +30,19 @@ const StyledMenu = styled.ul`
     }
 
     &:nth-child(2) {
-      margin-top: 10px;
+      margin-top: ${(props) => (props.title ? '10px' : 'inherit')};
     }
   }
   a {
     display: inline-block;
-    font-size: 2rem;
+    font-size: 3rem;
     text-transform: uppercase;
     padding: 5px 10px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: row;
+    align-items: center;
   }
 `;
 
