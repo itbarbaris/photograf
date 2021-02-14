@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   z-index: 101;
-
+  background-color: rgba(0, 0, 0, 0.2);
   .socials {
     a {
       color: #d2f0ee;

@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     color: #323232;
     font-family: 'Yanone Kaffeesatz', sans-serif;
-    overflow: hidden;
   }
 
   #__next {
